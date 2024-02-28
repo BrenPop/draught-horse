@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUserRequest;
 use App\Providers\RouteServiceProvider;
 use App\Services\UserService;
+use App\Services\UserTypeService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +14,14 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
+    protected $userTypeService;
     protected $userService;
 
-    public function __construct(UserService $userService)
-    {
+    public function __construct(
+        UserTypeService $userTypeService,
+        UserService $userService
+    ) {
+        $this->userTypeService = $userTypeService;
         $this->userService = $userService;
     }
 
@@ -26,6 +31,7 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         $userTypes = $this->userService->getRegistrationUserTypes();
+
         return view('auth.register', compact('userTypes'));
     }
 

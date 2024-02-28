@@ -10,16 +10,16 @@ class BaseService implements IBaseService
     /**
      * @var IBaseRepository
      */
-    protected $baseRepository;
+    protected $repository;
 
     /**
      * BaseService constructor.
      * 
      * @param IBaseRepository $baseRepository
      */
-    public function __construct(IBaseRepository $baseRepository)
+    public function __construct(IBaseRepository $repository)
     {
-        $this->baseRepository = $baseRepository;
+        $this->repository = $repository;
     }
 
     /**
@@ -27,7 +27,7 @@ class BaseService implements IBaseService
      */
     public function getAll()
     {
-        return $this->baseRepository->getAll();
+        return $this->repository->getAll();
     }
 
     /**
@@ -36,7 +36,7 @@ class BaseService implements IBaseService
      */
     public function findById($id)
     {
-        return $this->baseRepository->findById($id);
+        return $this->repository->findById($id);
     }
 
     /**
@@ -45,7 +45,7 @@ class BaseService implements IBaseService
      */
     public function create($data)
     {
-        return $this->baseRepository->create($data);
+        return $this->repository->create($data);
     }
 
     /**
@@ -55,7 +55,7 @@ class BaseService implements IBaseService
      */
     public function update($data, $id)
     {
-        return $this->baseRepository->update($data, $id);
+        return $this->repository->update($data, $id);
     }
 
     /**
@@ -64,6 +64,6 @@ class BaseService implements IBaseService
      */
     public function delete($id)
     {
-        return $this->baseRepository->delete($id);
+        return $this->repository->delete($id);
     }
 }
