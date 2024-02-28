@@ -12,7 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // /** Seed data tables */
         // $this->call(UserTypeSeeder::class);
-        $this->call(UserSeeder::class);
+        // $this->call(BarTypeSeeder::class);
+
+        // /** Seed user data */
+        // $this->call(UserSeeder::class);
     }
 }
