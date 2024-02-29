@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $userTypes = $this->userService->getRegistrationUserTypes();
+        $userTypes = $this->userTypeService->getRegistrationUserTypes();
 
         return view('auth.register', compact('userTypes'));
     }

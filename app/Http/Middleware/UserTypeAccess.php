@@ -19,7 +19,7 @@ class UserTypeAccess
         // Get the authenticated user
         $user = $request->user();
 
-        // Convert type strings to their respective IDs
+        // Convert $userTypes strings to their respective IDs
         $userTypeIds = collect($userTypes)->map(function ($userType) {
             return UserType::where('name', $userType)->value('id');
         });
@@ -29,7 +29,7 @@ class UserTypeAccess
             return $next($request);
         }
 
-        // If user does not have the required user type, redirect or return response as needed
-        return response()->json(['error' => 'Unauthorized.'], 401);
+        // If user does not have the required user type, throw 401
+        abort(401, 'Unauthorized.');
     }
 }

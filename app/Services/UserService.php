@@ -12,9 +12,4 @@ class UserService extends BaseService implements IUserService
     {
         parent::__construct($userRepository);
     }
-
-    public function getRegistrationUserTypes()
-    {
-        return UserType::where('slug', '!=', 'admin')->pluck('name', 'id');
-    }
 }

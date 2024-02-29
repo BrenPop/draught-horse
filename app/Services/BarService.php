@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\IBarRepository;
+use App\Repositories\BarRepository;
 use App\Services\Interfaces\IBarService;
 
-class BarService extends IBarService
+class BarService extends BaseService implements IBarService
 {
-    public function __construct(IBarRepository $iBarRepository)
+    public function __construct(BarRepository $barRepository)
     {
-        parent::__construct($iBarRepository);
+        parent::__construct($barRepository);
     }
 }

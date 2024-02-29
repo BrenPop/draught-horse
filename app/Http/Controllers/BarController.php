@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Interfaces\IBarService;
+use App\Services\BarService;
 use Illuminate\Http\Request;
 
 class BarController extends BaseController
@@ -10,9 +10,9 @@ class BarController extends BaseController
     /**
      * Construct the class.
      * 
-     * @param IBarService $service
+     * @param BarService $service
      */
-    public function __construct(IBarService $service)
+    public function __construct(BarService $service)
     {
         parent::__construct($service);
     }
@@ -22,7 +22,7 @@ class BarController extends BaseController
      */
     public function index()
     {
-        //
+        return view('bar.dashboard');
     }
 
     /**

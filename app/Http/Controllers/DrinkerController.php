@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Interfaces\IDrinkerService;
+use App\Services\DrinkerService;
 use Illuminate\Http\Request;
 
 class DrinkerController extends BaseController
@@ -10,9 +10,9 @@ class DrinkerController extends BaseController
     /**
      * Construct the class.
      * 
-     * @param IDrinkerService $service
+     * @param DrinkerService $service
      */
-    public function __construct(IDrinkerService $service)
+    public function __construct(DrinkerService $service)
     {
         parent::__construct($service);
     }
@@ -22,7 +22,7 @@ class DrinkerController extends BaseController
      */
     public function index()
     {
-        //
+        return view('drinker.dashboard');
     }
 
     /**

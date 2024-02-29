@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\IDrinkerRepository;
+use App\Repositories\DrinkerRepositroy;
 use App\Services\Interfaces\IDrinkerService;
 
 class DrinkerService extends BaseService implements IDrinkerService
 {
-    public function __construct(IDrinkerRepository $iDrinkerRepository)
+    public function __construct(DrinkerRepositroy $drinkerRepository)
     {
-        parent::__construct($iDrinkerRepository);
+        parent::__construct($drinkerRepository);
     }
 }

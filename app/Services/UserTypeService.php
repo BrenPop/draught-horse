@@ -17,6 +17,6 @@ class UserTypeService extends BaseService implements IUserTypeService
     {
         $userTypes = $this->repository->getAll();
 
-        return $userTypes::where('slug', '!=', 'admin')->pluck('name', 'id');
+        return $userTypes->where('slug', '!=', 'admin')->pluck('name', 'id');
     }
 }
