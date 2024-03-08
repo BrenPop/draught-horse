@@ -2,22 +2,16 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\IBaseRepository;
 use App\Services\Interfaces\IBaseService;
 
 class BaseService implements IBaseService
 {
-    /**
-     * @var IBaseRepository
-     */
     protected $repository;
 
     /**
      * BaseService constructor.
-     * 
-     * @param IBaseRepository $baseRepository
      */
-    public function __construct(IBaseRepository $repository)
+    public function __construct($repository)
     {
         $this->repository = $repository;
     }
@@ -43,7 +37,7 @@ class BaseService implements IBaseService
      * @param $data
      * @return mixed
      */
-    public function create($data)
+    public function create(array $data)
     {
         return $this->repository->create($data);
     }

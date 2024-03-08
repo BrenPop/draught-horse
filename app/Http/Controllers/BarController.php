@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateBarRequest;
+use App\Models\BarType;
 use App\Services\BarService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Ramsey\Uuid\Guid\Guid;
 
 class BarController extends BaseController
 {
@@ -22,7 +27,13 @@ class BarController extends BaseController
      */
     public function index()
     {
-        return view('bar.dashboard');
+        $bars = $this->service->getUserBars();
+
+        if (count($bars) == 0) {
+            return redirect()->route('bar.create')->with('info', 'Time to create your first bar!');
+        }
+
+        return view('bar.dashboard', compact('bars'));
     }
 
     /**
@@ -30,15 +41,41 @@ class BarController extends BaseController
      */
     public function create()
     {
-        //
+        if (Cache::has('bar_types')) {
+            $barTypes = Cache::get('bar_types');
+        } else {
+            $barTypes = BarType::all()->pluck('name', 'id');
+            Cache::put('bar_types', $barTypes, 1440);
+        }
+
+        return view('bar.create.create', compact('barTypes'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateBarRequest $request)
     {
-        //
+        try {
+            $image = $request->file('profile_picture');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $request->file('profile_picture')->move(public_path('profile_pictures'), $imageName);
+            $imagePath = '/profile_pictures/' . $imageName;
+
+            $data = [
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+                'profile_picture_path' => $imagePath,
+                'user_id' => request()->user()->id,
+                'bar_type_id' => $request->get('bar_type_id'),
+            ];
+
+            $this->service->create($data);
+
+            return redirect()->route('bar.index')->with('success', 'Bar created successfully!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -52,9 +89,12 @@ class BarController extends BaseController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
-        //
+        $bar = $this->service->findById((int)$id);
+        dd($this->service);
+
+        return view('bar.profile.profile-detail', compact('bar'));
     }
 
     /**

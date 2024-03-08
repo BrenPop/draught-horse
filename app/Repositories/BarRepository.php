@@ -11,4 +11,12 @@ class BarRepository extends BaseRepository implements IBarRepository
     {
         parent::__construct($bar);
     }
+
+    public function getAllBarsByUserId(int $userId)
+    {
+        // return all bars where user_id = $userId
+        return $this->model
+            ->where('user_id', $userId)
+            ->get();
+    }
 }

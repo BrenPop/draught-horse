@@ -44,7 +44,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'userType.Access:admin']
 });
 
 /** Bar routes */
-Route::prefix('bar')->middleware(['auth', 'verified', 'userType.Access:bar'])->group(function () {
+Route::prefix('bar')->middleware(['auth', 'verified', 'userType.Access:admin,bar'])->group(function () {
     Route::get('/', [BarController::class, 'index'])->name('bar.index');
     Route::get('/create', [BarController::class, 'create'])->name('bar.create');
     Route::post('/', [BarController::class, 'store'])->name('bar.store');
@@ -55,7 +55,7 @@ Route::prefix('bar')->middleware(['auth', 'verified', 'userType.Access:bar'])->g
 });
 
 /** Drinker routes */
-Route::prefix('drinker')->middleware(['auth', 'verified', 'userType.Access:drinker'])->group(function () {
+Route::prefix('drinker')->middleware(['auth', 'verified', 'userType.Access:admin,drinker'])->group(function () {
     Route::get('/', [DrinkerController::class, 'index'])->name('drinker.index');
     Route::get('/create', [DrinkerController::class, 'create'])->name('drinker.create');
     Route::post('/', [DrinkerController::class, 'store'])->name('drinker.store');

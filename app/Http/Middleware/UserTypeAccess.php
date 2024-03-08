@@ -29,7 +29,7 @@ class UserTypeAccess
             return $next($request);
         }
 
-        // If user does not have the required user type, throw 401
+        // If user does not have the required user type, throw 401 error
         abort(401, 'Unauthorized.');
     }
 }
