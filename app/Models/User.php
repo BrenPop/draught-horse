@@ -48,4 +48,19 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserType::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->userType->slug === 'admin';
+    }
+
+    public function isBar()
+    {
+        return $this->userType->slug === 'bar-owner';
+    }
+
+    public function isDrinker()
+    {
+        return $this->userType->slug === 'drinker';
+    }
 }

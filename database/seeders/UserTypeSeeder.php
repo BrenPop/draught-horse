@@ -20,9 +20,9 @@ class UserTypeSeeder extends Seeder
                 'description' => 'Admin user',
             ],
             [
-                'name' => 'Bar',
-                'slug' => 'bar',
-                'description' => 'Bar user',
+                'name' => 'Bar Owner',
+                'slug' => 'bar-owner',
+                'description' => 'Bar Owner user',
             ],
             [
                 'name' => 'Drinker',

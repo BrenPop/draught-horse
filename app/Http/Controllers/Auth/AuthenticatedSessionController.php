@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
         }
 
-        if ($userType->slug == 'bar') {
+        if ($userType->slug == 'bar-owner') {
             return redirect()->intended(RouteServiceProvider::BAR_HOME);
         }
 

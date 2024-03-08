@@ -21,7 +21,7 @@ class UserTypeAccess
 
         // Convert $userTypes strings to their respective IDs
         $userTypeIds = collect($userTypes)->map(function ($userType) {
-            return UserType::where('name', $userType)->value('id');
+            return UserType::where('slug', $userType)->value('id');
         });
 
         // Check if the user is authenticated and has the required user type

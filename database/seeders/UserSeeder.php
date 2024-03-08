@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $adminUserTypeId = UserType::where('slug', 'admin')->first()->id;
-        $barUserTypeId = UserType::where('slug', 'bar')->first()->id;
+        $barUserTypeId = UserType::where('slug', 'bar-owner')->first()->id;
         $drinkerUserTypeId = UserType::where('slug', 'drinker')->first()->id;
 
         \App\Models\User::factory()->create([

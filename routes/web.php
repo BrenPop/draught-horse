@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified', 'userType.Access:admin,bar,drinker'])->name('dashboard');
+})->middleware(['auth', 'verified', 'userType.Access:admin,bar-owner,drinker'])->name('dashboard');
 
 /** User Profile */
 Route::middleware('auth')->group(function () {
@@ -44,7 +44,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'userType.Access:admin']
 });
 
 /** Bar routes */
-Route::prefix('bar')->middleware(['auth', 'verified', 'userType.Access:admin,bar'])->group(function () {
+Route::prefix('bar')->middleware(['auth', 'verified', 'userType.Access:admin,bar-owner'])->group(function () {
     Route::get('/', [BarController::class, 'index'])->name('bar.index');
     Route::get('/create', [BarController::class, 'create'])->name('bar.create');
     Route::post('/', [BarController::class, 'store'])->name('bar.store');
