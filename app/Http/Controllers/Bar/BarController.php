@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Bar;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\CreateBarRequest;
 use App\Models\BarType;
 use App\Services\BarService;

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
 
-class AdminController extends Controller
+class AdminController extends BaseController
 {
     public function __construct()
     {

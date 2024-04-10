@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Drinker;
 
+use App\Http\Controllers\BaseController;
 use App\Services\DrinkerService;
 use Illuminate\Http\Request;
 

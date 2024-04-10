@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\BarController;
-use App\Http\Controllers\DrinkerController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Bar\BarController;
+use App\Http\Controllers\Drinker\DrinkerController;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
