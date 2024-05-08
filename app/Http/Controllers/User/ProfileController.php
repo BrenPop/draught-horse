@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,11 @@ use Illuminate\View\View;
 
 class ProfileController extends BaseController
 {
+    public function __construct(UserService $userService)
+    {
+        $this->service = $userService;
+    }
+
     /**
      * Display the user's profile form.
      */

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Bar\BarController;
 use App\Http\Controllers\Drinker\DrinkerController;
@@ -63,6 +64,12 @@ Route::prefix('drinker')->middleware(['auth', 'verified', 'userType.Access:admin
     Route::get('/{id}/edit', [DrinkerController::class, 'edit'])->name('drinker.edit');
     Route::put('/{id}', [DrinkerController::class, 'update'])->name('drinker.update');
     Route::delete('/{id}', [DrinkerController::class, 'destroy'])->name('drinker.destroy');
+});
+
+Route::prefix('address')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/get-countries', [AddressController::class, 'getCountries'])->name('address.get-countries');
+    Route::get('/get-provinces/{id}', [AddressController::class, 'getProvincesByCountry'])->name('address.get-provinces');
+    Route::get('/get-cities/{id}', [AddressController::class, 'getCitiesByProvince'])->name('address.get-cities');
 });
 
 require __DIR__ . '/auth.php';

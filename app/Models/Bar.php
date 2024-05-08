@@ -23,8 +23,13 @@ class Bar extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function barType()
+    public function type()
     {
-        return $this->belongsTo(barType::class, 'bar_type_id');
+        return $this->belongsTo(BarType::class, 'bar_type_id');
+    }
+
+    public function address()
+    {
+        return $this->hasOne(BarAddress::class);
     }
 }

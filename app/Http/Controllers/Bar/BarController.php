@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Bar;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\CreateBarRequest;
+use App\Http\Requests\Bar\CreateBarRequest;
+use App\Http\Requests\Bar\UpdateBarRequest;
 use App\Models\BarType;
+use App\Services\AddressService;
 use App\Services\BarService;
+use App\Services\BarTypeService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -18,8 +21,11 @@ class BarController extends BaseController
      * 
      * @param BarService $service
      */
-    public function __construct(BarService $service)
-    {
+    public function __construct(
+        BarService $service,
+        protected BarTypeService $barTypeService,
+        protected AddressService $addressService
+    ) {
         parent::__construct($service);
     }
 
@@ -34,7 +40,7 @@ class BarController extends BaseController
             return redirect()->route('bar.create')->with('info', 'Time to create your first bar!');
         }
 
-        return view('bar.dashboard', compact('bars'));
+        return view('bar.index', compact('bars'));
     }
 
     /**
@@ -42,14 +48,12 @@ class BarController extends BaseController
      */
     public function create()
     {
-        if (Cache::has('bar_types')) {
-            $barTypes = Cache::get('bar_types');
-        } else {
-            $barTypes = BarType::all()->pluck('name', 'id');
-            Cache::put('bar_types', $barTypes, 1440);
-        }
+        $barTypes = $this->barTypeService->getBarTypes();
+        $countries = $this->addressService->getAllCountriesForDropdown();
+        $provinces = [0 => 'Select Province'];
+        $cities = [0 => 'Select City'];
 
-        return view('bar.create.create', compact('barTypes'));
+        return view('bar.create', compact('barTypes', 'countries', 'provinces', 'cities'));
     }
 
     /**
@@ -84,7 +88,10 @@ class BarController extends BaseController
      */
     public function show(string $id)
     {
-        //
+        $bar = $this->service->findById((int)$id);
+        dd($bar->address->getTable());
+
+        return view('bar.profile.profile-detail', compact('bar'));
     }
 
     /**
@@ -93,7 +100,6 @@ class BarController extends BaseController
     public function edit(int $id)
     {
         $bar = $this->service->findById((int)$id);
-        dd($this->service);
 
         return view('bar.profile.profile-detail', compact('bar'));
     }
@@ -101,7 +107,7 @@ class BarController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBarRequest $request, string $id)
     {
         //
     }

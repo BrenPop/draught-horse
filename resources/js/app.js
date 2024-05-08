@@ -1,3 +1,4 @@
+import './bar';
 import './bootstrap';
 
 import Alpine from 'alpinejs';

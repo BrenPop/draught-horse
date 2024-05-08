@@ -1,13 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Bar Dashboard') }}
+            {{ __('My Bars') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <x-bar-components.bar-list :bars="$bars" />
+            <div class="row">
+                <x-bar.bar-index :bars="$bars" />
+            </div>
         </div>
     </div>
 </x-app-layout>

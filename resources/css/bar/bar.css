@@ -1,0 +1,7 @@
+.bar-list-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    color: white;
+    padding: 14px;
+}
