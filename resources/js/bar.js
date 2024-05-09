@@ -5,14 +5,18 @@ document.addEventListener('DOMContentLoaded', function () {
     
     countrySelect.addEventListener('change', function () {
         var countryId = this.value;
-        var url = '/address/get-provinces/' + countryId;
+        var url = '/api/address/get-provinces/' + countryId;
+
         var xhr = new XMLHttpRequest();
+
         xhr.open('GET', url, true);
+
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 400) {
                 var response = xhr.responseText;
+                console.dir(response);
                 var provincesObject = JSON.parse(response);
-                
+
                 provinceSelect.innerHTML = '';
 
                 for (var id in provincesObject) {
@@ -39,9 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     provinceSelect.addEventListener('change', function () {
         var provinceId = this.value;
-        var url = '/address/get-cities/' + provinceId;
+        var url = '/api/address/get-cities/' + provinceId;
+
         var xhr = new XMLHttpRequest();
+
         xhr.open('GET', url, true);
+
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 400) {
                 var response = xhr.responseText;

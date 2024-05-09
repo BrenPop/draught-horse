@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CountrySeeder::class);
         $this->call(ProvinceSeeder::class);
         $this->call(CitySeeder::class);
+        $this->call(BarRegistrationStatusSeeder::class);
 
         // /** Seed user data */
         $this->call(UserSeeder::class);

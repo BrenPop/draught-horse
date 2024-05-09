@@ -14,6 +14,6 @@ class BarTypeRepository extends BaseRepository implements IBarTypeRepository
 
     public function getBarTypes()
     {
-        return $this->model->all()->pluck('name', 'id');
+        return $this->model->all()->pluck('name', 'id')->toArray();
     }
 }

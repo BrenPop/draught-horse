@@ -27,6 +27,12 @@ class CreateBarRequest extends FormRequest
             'description' => 'required|string|max:1000',
             'profile_picture' => 'required|image',
             'bar_type_id' => 'required|exists:bar_types,id',
+            'address_line_one' => 'required|string|max:255',
+            'address_line_two' => 'sometimes|string|max:255',
+            'country_id' => 'required|exists:countries,id',
+            'province_id' => 'required|exists:provinces,id',
+            'city_id' => 'required|exists:cities,id',
+            'postal_code' => 'required|string|max:10',
         ];
     }
 }

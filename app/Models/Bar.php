@@ -16,6 +16,7 @@ class Bar extends Model
         'user_id',
         'bar_type_id',
         'profile_completion_percentage',
+        'bar_registrion_status_id',
     ];
 
     public function user()
@@ -30,6 +31,11 @@ class Bar extends Model
 
     public function address()
     {
-        return $this->hasOne(BarAddress::class);
+        return $this->hasOne(Address::class);
+    }
+
+    public function barRegistrationStatus()
+    {
+        return $this->belongsTo(BarRegistrationStatus::class, 'bar_registrion_status_id');
     }
 }

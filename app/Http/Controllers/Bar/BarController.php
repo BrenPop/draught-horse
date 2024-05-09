@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Bar;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Bar\CreateBarRequest;
 use App\Http\Requests\Bar\UpdateBarRequest;
+use App\Models\BarRegistrationStatus;
 use App\Models\BarType;
 use App\Services\AddressService;
 use App\Services\BarService;
@@ -12,6 +13,7 @@ use App\Services\BarTypeService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Guid\Guid;
 
 class BarController extends BaseController
@@ -48,7 +50,7 @@ class BarController extends BaseController
      */
     public function create()
     {
-        $barTypes = $this->barTypeService->getBarTypes();
+        $barTypes = $this->barTypeService->getBarTypesForDropdown();
         $countries = $this->addressService->getAllCountriesForDropdown();
         $provinces = [0 => 'Select Province'];
         $cities = [0 => 'Select City'];
@@ -62,23 +64,11 @@ class BarController extends BaseController
     public function store(CreateBarRequest $request)
     {
         try {
-            $image = $request->file('profile_picture');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $request->file('profile_picture')->move(public_path('profile_pictures'), $imageName);
-            $imagePath = '/profile_pictures/' . $imageName;
-
-            $data = [
-                'name' => $request->get('name'),
-                'description' => $request->get('description'),
-                'profile_picture_path' => $imagePath,
-                'user_id' => request()->user()->id,
-                'bar_type_id' => $request->get('bar_type_id'),
-            ];
-
-            $this->service->create($data);
+            $this->service->createBar($request);
 
             return redirect()->route('bar.index')->with('success', 'Bar created successfully!');
         } catch (Exception $e) {
+            Log::error($e->getMessage());
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -89,7 +79,6 @@ class BarController extends BaseController
     public function show(string $id)
     {
         $bar = $this->service->findById((int)$id);
-        dd($bar->address->getTable());
 
         return view('bar.profile.profile-detail', compact('bar'));
     }

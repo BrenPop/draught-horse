@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('postal_code');
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
-            $table->foreignId('bar_id')->constrained()->onDelete('cascade')->nullable();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('bar_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bar_addresses');
+        Schema::dropIfExists('addresses');
     }
 };

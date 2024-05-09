@@ -12,7 +12,7 @@ class AddressRepository extends BaseRepository implements IAddressRepository
 {
     public function __construct(Address $address)
     {
-        $this->model = $address;
+        parent::__construct($address);
     }
 
     /**

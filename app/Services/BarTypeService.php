@@ -12,8 +12,13 @@ class BarTypeService extends BaseService implements IBarTypeService
         parent::__construct($barTypeRepository);
     }
 
-    public function getBarTypes()
+    public function getBarTypesForDropdown()
     {
-        return $this->repository->getBarTypes();
+        $barTypes = $this->repository->getBarTypes();
+        $barTypes = [
+            0 => "Select Bar Type",
+        ] + $barTypes;
+
+        return $barTypes;
     }
 }
