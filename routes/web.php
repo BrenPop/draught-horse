@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Bar\BarController;
 use App\Http\Controllers\Drinker\DrinkerController;
+use App\Http\Controllers\Search\SearchController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified', 'userType.Access:admin,bar-owner,drinker'])->name('dashboard');
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 /** User Profile */
 Route::middleware('auth')->group(function () {
