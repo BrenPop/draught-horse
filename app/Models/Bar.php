@@ -71,4 +71,19 @@ class Bar extends Model
             'description' => $this->description,
         ];
     }
+
+    public function scopePending($query)
+    {
+        return $query->where('bar_registrion_status_id', BarRegistrationStatus::PENDING);
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('bar_registrion_status_id', BarRegistrationStatus::APPROVED);
+    }
+
+    public function scopeRejected($query)
+    {
+        return $query->where('bar_registrion_status_id', BarRegistrationStatus::REJECTED);
+    }
 }

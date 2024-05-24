@@ -18,4 +18,17 @@ class BarRepository extends BaseRepository implements IBarRepository
             ->where('user_id', $userId)
             ->get();
     }
+
+    public function getActiveBars(bool $count = false)
+    {
+        if ($count) {
+            return $this->model
+                ->active()
+                ->count();
+        }
+
+        return $this->model
+            ->active()
+            ->get();
+    }
 }
