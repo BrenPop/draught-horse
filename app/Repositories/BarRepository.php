@@ -31,4 +31,17 @@ class BarRepository extends BaseRepository implements IBarRepository
             ->active()
             ->get();
     }
+
+    public function getPendingBars(bool $count = false)
+    {
+        if ($count) {
+            return $this->model
+                ->pending()
+                ->count();
+        }
+
+        return $this->model
+            ->pending()
+            ->get();
+    }
 }
